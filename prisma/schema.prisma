@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ReferralCode {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  influencer  String
+  discount    Int      @default(100)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+model ReferralClick {
+  id        String   @id @default(cuid())
+  slug      String
+  leadId    String?
+  ip        String?
+  device    String?
+  createdAt DateTime @default(now())
+}
+
+model ProjectLead {
+  id                 String   @id @default(cuid())
+  name               String
+  email              String
+  phone              String
+  idea               String
+  designPreference   String
+  brandingFiles      String[]
+  paymentStatus      String   @default("pending")
+  projectStatus      String   @default("queued")
+  trackingCode       String   @unique
+  progressPercent    Int      @default(0)
+  invoiceUrl         String?
+  referralSlug       String?
+  finalPrice         Int      @default(800)
+  depositAmount      Int      @default(400)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
