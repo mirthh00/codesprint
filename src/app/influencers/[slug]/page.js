@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
 export default async function InfluencerDashboard({ params }) {
-  const slug = params.slug;
+   const { slug } = await params;
 
   // Replace with your real referral model later
   const referrals = await prisma.projectLead.findMany({

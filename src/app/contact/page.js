@@ -1,4 +1,3 @@
-"use client"
 // app/contact/page.jsx
 import Link from "next/link";
 

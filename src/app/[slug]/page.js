@@ -3,11 +3,16 @@ import Hero from "@/components/Hero";
 import { notFound } from "next/navigation";
 
 export default async function ReferralLanding({ params }) {
+  // Await params for Next.js 16 App Router
+  const { slug } = await params;
+
   const referral = await prisma.referralCode.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
   });
 
-  if (!referral || !referral.active) return notFound();
+  if (!referral || !referral.active) {
+    notFound();
+  }
 
   return (
     <Hero

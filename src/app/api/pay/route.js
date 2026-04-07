@@ -50,7 +50,7 @@ export async function GET(req) {
       merchant_id: process.env.PAYFAST_MERCHANT_ID,
       merchant_key: process.env.PAYFAST_MERCHANT_KEY,
       return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/success`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/cancel`,
+      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/failed/cancel`,
       notify_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/payfast/notify`,
       name_first: lead.name.split(" ")[0] || lead.name,
       email_address: lead.email,
