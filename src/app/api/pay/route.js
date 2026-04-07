@@ -57,8 +57,8 @@ export async function GET(req) {
     }
 
   const paymentData = {
-  merchant_id: process.env.PAYFAST_MERCHANT_ID!,
-  merchant_key: process.env.PAYFAST_MERCHANT_KEY!,
+  merchant_id: process.env.PAYFAST_MERCHANT_ID,
+  merchant_key: process.env.PAYFAST_MERCHANT_KEY,
   return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success?leadId=${lead.id}`,
   cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/fail`,
   notify_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/payfast/notify`,
@@ -75,7 +75,7 @@ export async function GET(req) {
       process.env.PAYFAST_PASSPHRASE
     );
 
-   const params = new URLSearchParams(paymentData as any);
+  const params = new URLSearchParams(paymentData);
 params.append("signature", signature);
 
     const payfastUrl = `https://sandbox.payfast.co.za/eng/process?${params.toString()}`;
