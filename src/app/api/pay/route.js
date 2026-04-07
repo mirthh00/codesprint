@@ -2,35 +2,25 @@ import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import crypto from "crypto";
 
-function generateSignature(data, passphrase = "") {
-  const cleaned = Object.fromEntries(
-    Object.entries(data).filter(
-      ([_, v]) => v !== undefined && v !== null && v !== ""
-    )
-  );
+function generateSignature(data, passPhrase = null) {
+  let pfOutput = "";
 
-  const sortedKeys = Object.keys(cleaned).sort();
-
-  const pfOutput = sortedKeys
-    .map((key) => {
-      let value = cleaned[key];
-
-      if (typeof value !== "string") {
-        value = String(value);
+  for (let key in data) {
+    if (data.hasOwnProperty(key)) {
+      if (data[key] !== "") {
+        pfOutput += `${key}=${encodeURIComponent(data[key].toString().trim()).replace(/%20/g, "+")}&`;
       }
+    }
+  }
 
-      return `${key}=${encodeURIComponent(value).replace(/%20/g, "+")}`;
-    })
-    .join("&");
+  // Remove last &
+  let getString = pfOutput.slice(0, -1);
 
-  const stringToHash = passphrase
-    ? `${pfOutput}&passphrase=${encodeURIComponent(passphrase).replace(/%20/g, "+")}`
-    : pfOutput;
+  if (passPhrase !== null) {
+    getString += `&passphrase=${encodeURIComponent(passPhrase.trim()).replace(/%20/g, "+")}`;
+  }
 
-  return crypto
-    .createHash("md5")
-    .update(stringToHash)
-    .digest("hex");
+  return crypto.createHash("md5").update(getString).digest("hex");
 }
 
 export async function GET(req) {
@@ -56,26 +46,27 @@ export async function GET(req) {
       );
     }
 
-  const paymentData = {
+ const paymentData = {
   merchant_id: process.env.PAYFAST_MERCHANT_ID,
   merchant_key: process.env.PAYFAST_MERCHANT_KEY,
   return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success?leadId=${lead.id}`,
   cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/fail`,
   notify_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/payfast/notify`,
   name_first: (lead.name || "").split(" ")[0],
+  name_last: (lead.name || "").split(" ")[1] || "",
   email_address: lead.email,
   m_payment_id: String(lead.id),
   amount: Number(lead.depositAmount).toFixed(2),
   item_name: "CodeSprint Website Deposit",
-  item_description: `24-hour website build deposit for ${lead.name}`,
 };
 
-    const signature = generateSignature(
-      paymentData,
-      process.env.PAYFAST_PASSPHRASE
-    );
+   const signature = generateSignature(
+  paymentData,
+  process.env.PAYFAST_PASSPHRASE || null
+);
 
-  const params = new URLSearchParams(paymentData);
+const params = new URLSearchParams(paymentData);
+
 params.append("signature", signature);
 
     const payfastUrl = `https://sandbox.payfast.co.za/eng/process?${params.toString()}`;
