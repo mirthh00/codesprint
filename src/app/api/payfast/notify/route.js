@@ -10,14 +10,15 @@ export async function POST(req) {
     const paymentId = formData.get("m_payment_id");
 
     if (paymentStatus === "COMPLETE") {
+
       const lead = await prisma.projectLead.update({
-        where: { id: paymentId },
-        data: {
-          depositPaid: true,
-          projectStatus: "Build Started",
-          progressPercent: 10,
-        },
-      });
+  where: { id: paymentId },
+  data: {
+    paymentStatus: "Paid",
+    projectStatus: "Build Started",
+    progressPercent: 10,
+  },
+});
 
       // ✅ send email only after confirmed payment
       await sendConfirmation(lead.email, lead.trackingCode);
