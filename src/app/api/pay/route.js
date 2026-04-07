@@ -3,18 +3,28 @@ import { NextResponse } from "next/server";
 import crypto from "crypto";
 
 function generateSignature(data, passphrase = "") {
-  const pfOutput = Object.keys(data)
-    .filter((key) => data[key] !== "")
-    .sort()
-    .map(
-      (key) =>
-        `${key}=${encodeURIComponent(data[key])
-          .replace(/%20/g, "+")}`
+  const cleaned = Object.fromEntries(
+    Object.entries(data).filter(
+      ([_, v]) => v !== undefined && v !== null && v !== ""
     )
+  );
+
+  const sortedKeys = Object.keys(cleaned).sort();
+
+  const pfOutput = sortedKeys
+    .map((key) => {
+      let value = cleaned[key];
+
+      if (typeof value !== "string") {
+        value = String(value);
+      }
+
+      return `${key}=${encodeURIComponent(value).replace(/%20/g, "+")}`;
+    })
     .join("&");
 
   const stringToHash = passphrase
-    ? `${pfOutput}&passphrase=${encodeURIComponent(passphrase)}`
+    ? `${pfOutput}&passphrase=${encodeURIComponent(passphrase).replace(/%20/g, "+")}`
     : pfOutput;
 
   return crypto
@@ -46,29 +56,27 @@ export async function GET(req) {
       );
     }
 
-    const paymentData = {
-      merchant_id: process.env.PAYFAST_MERCHANT_ID,
-      merchant_key: process.env.PAYFAST_MERCHANT_KEY,
-      return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success?leadId=${lead.id}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/fail`,
-      notify_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/payfast/notify`,
-      name_first: lead.name.split(" ")[0] || lead.name,
-      email_address: lead.email,
-      m_payment_id: lead.id,
-      amount: lead.depositAmount.toFixed(2),
-      item_name: "CodeSprint Website Deposit",
-      item_description: `24-hour website build deposit for ${lead.name}`,
-    };
+  const paymentData = {
+  merchant_id: process.env.PAYFAST_MERCHANT_ID!,
+  merchant_key: process.env.PAYFAST_MERCHANT_KEY!,
+  return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success?leadId=${lead.id}`,
+  cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/fail`,
+  notify_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/payfast/notify`,
+  name_first: (lead.name || "").split(" ")[0],
+  email_address: lead.email,
+  m_payment_id: String(lead.id),
+  amount: Number(lead.depositAmount).toFixed(2),
+  item_name: "CodeSprint Website Deposit",
+  item_description: `24-hour website build deposit for ${lead.name}`,
+};
 
     const signature = generateSignature(
       paymentData,
       process.env.PAYFAST_PASSPHRASE
     );
 
-    const params = new URLSearchParams({
-      ...paymentData,
-      signature,
-    });
+   const params = new URLSearchParams(paymentData as any);
+params.append("signature", signature);
 
     const payfastUrl = `https://sandbox.payfast.co.za/eng/process?${params.toString()}`;
 
