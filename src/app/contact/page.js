@@ -32,50 +32,52 @@ export default function ContactPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-white to-gray-50 text-gray-900">
-      <section className="max-w-7xl mx-auto px-6 pt-8 pb-16">
-        <div className="max-w-3xl">
-          <p className="text-green-600 font-semibold uppercase tracking-wider text-sm mb-3">
-            Contact Us
-          </p>
-          <h1 className="text-5xl font-bold leading-tight mb-6">
-            Let’s build your next website sprint.
-          </h1>
-          <p className="text-gray-600 text-lg leading-8 mb-10">
-            Reach the right team instantly. We’ve created dedicated mailboxes so
-            every request moves fast and lands with the right people.
-          </p>
-        </div>
+   <main className="min-h-screen bg-gradient-to-br from-black via-[#0d0d0d] to-[#111] text-white">
+  <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-10 sm:pb-16">
+    <div className="max-w-3xl">
+      <p className="text-green-400 font-semibold uppercase tracking-[0.15em] sm:tracking-wider text-xs sm:text-sm mb-3">
+        Contact Us
+      </p>
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6">
+        Let’s build your next website sprint.
+      </h1>
+      <p className="text-gray-300 text-base sm:text-lg leading-7 sm:leading-8 mb-8 sm:mb-10">
+        Reach the right team instantly. We’ve created dedicated mailboxes so
+        every request moves fast and lands with the right people.
+      </p>
+    </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {contacts.map((item) => (
-            <div
-              key={item.email}
-              className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm hover:shadow-xl transition"
-            >
-              <p className="text-sm uppercase tracking-wider text-green-600 font-semibold mb-2">
-                {item.title}
-              </p>
-              <a
-                href={`mailto:${item.email}`}
-                className="text-2xl font-bold text-gray-900 hover:text-green-600 transition"
-              >
-                {item.email}
-              </a>
-              <p className="text-gray-600 mt-3 leading-7">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-10">
-          <Link
-            href="/begin"
-            className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl text-lg font-semibold inline-block shadow-lg"
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+      {contacts.map((item) => (
+        <div
+          key={item.email}
+          className="bg-white/5 border border-white/10 rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-xl hover:bg-white/10 transition"
+        >
+          <p className="text-xs sm:text-sm uppercase tracking-[0.15em] sm:tracking-wider text-green-400 font-semibold mb-2">
+            {item.title}
+          </p>
+          <a
+            href={`mailto:${item.email}`}
+            className="text-lg sm:text-2xl font-bold text-white hover:text-green-400 transition break-all"
           >
-            Start Your Project →
-          </Link>
+            {item.email}
+          </a>
+          <p className="text-gray-300 mt-3 leading-6 sm:leading-7 text-sm sm:text-base">
+            {item.desc}
+          </p>
         </div>
-      </section>
-    </main>
+      ))}
+    </div>
+
+    <div className="mt-8 sm:mt-10">
+      <Link
+        href="/begin"
+        className="bg-green-600 hover:bg-green-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl text-sm sm:text-lg font-semibold inline-block shadow-lg"
+      >
+        Start Your Project →
+      </Link>
+    </div>
+  </section>
+</main>
   );
 }
