@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function GetStarted() {
   return (
-    <main className="min-h-screen bg-white py-16">
+    <main className="min-h-screen bg-black">
       <LeadForm />
     </main>
   );
