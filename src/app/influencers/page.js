@@ -1,13 +1,13 @@
-// app/influencers/page.jsx
 "use client";
 
 import { useState } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function InfluencersPage() {
   const [username, setUsername] = useState("");
   const [phone, setPhone] = useState("");
-const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [generatedLink, setGeneratedLink] = useState("");
 
   function createLink(e) {
@@ -18,89 +18,125 @@ const [email, setEmail] = useState("");
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-white to-gray-50 text-gray-900 px-6 py-10">
-      <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-start">
-        {/* Info panel */}
-        <div className="bg-black text-white rounded-[2rem] p-8 shadow-2xl">
-          <p className="text-green-400 uppercase tracking-[0.2em] text-sm font-semibold mb-3">
-            Influencer Program
-          </p>
-          <h1 className="text-4xl font-bold mb-6">
-            Earn with every website signup you refer.
-          </h1>
-          <div className="space-y-4 text-gray-300 leading-8">
-            <p>✔ Every follower gets <strong>R100 OFF</strong> with your personal link</p>
-            <p>✔ Your audience lands on a personalized CodeSprint page</p>
-            <p>✔ Track clicks, signups, deposits, and conversions</p>
-            <p>✔ Dedicated dashboard at <strong>/influencers/yourname</strong></p>
-            <p>✔ Great for creators, founders, marketers, and business pages</p>
-          </div>
-          <p className="mt-8 text-sm text-gray-400">
-            Best practice: use your TikTok, Instagram, or YouTube handle so it’s easy for followers to trust.
-          </p>
+  <main className="min-h-screen bg-black text-white px-4 sm:px-6 py-10 sm:py-16">
+  <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 items-start">
+    
+    {/* LEFT SALES PANEL */}
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="bg-white/5 border border-white/10 rounded-3xl sm:rounded-[2rem] p-6 sm:p-8 md:p-10 shadow-2xl"
+    >
+      <p className="text-green-400 uppercase tracking-[0.15em] sm:tracking-[0.2em] text-xs sm:text-sm font-semibold mb-4">
+        Partner Program
+      </p>
+
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6">
+        Earn monthly income from every business you refer.
+      </h1>
+
+      <p className="text-gray-400 leading-7 sm:leading-8 text-base sm:text-lg mb-8">
+        Turn your audience into a revenue stream by referring premium
+        website builds through your custom CodeSprint link.
+      </p>
+
+      <div className="space-y-4 sm:space-y-5 text-gray-300">
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5">
+          ✔ Your followers receive <strong className="text-green-400">R100 OFF</strong>
         </div>
 
-        {/* Create link card */}
-        <div className="bg-white border border-gray-200 rounded-[2rem] shadow-2xl p-8">
-          <h2 className="text-3xl font-bold mb-4">Create your referral link</h2>
-          <p className="text-gray-600 leading-8 mb-6">
-            Enter your username once and instantly generate your CodeSprint referral page.
-            Share it in your bio, stories, videos, and WhatsApp status.
-          </p>
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5">
+          ✔ Personalized referral landing page using your username
+        </div>
 
-          <form onSubmit={createLink} className="space-y-5">
-  <input
-    value={username}
-    onChange={(e) => setUsername(e.target.value)}
-    placeholder="Enter username (e.g. tshego100)"
-    className="w-full border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-green-500"
-    required
-  />
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5">
+          ✔ Real-time dashboard with clicks, signups, deposits & payouts
+        </div>
 
-  <input
-    value={phone}
-    onChange={(e) => setPhone(e.target.value)}
-    placeholder="Phone number for payouts (optional)"
-    className="w-full border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-green-500"
-  />
-
-  <input
-    value={email}
-    onChange={(e) => setEmail(e.target.value)}
-    placeholder="Email for payout communication"
-    type="email"
-    className="w-full border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-green-500"
-  />
-
-  <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 text-sm text-gray-600 leading-7">
-    <p className="font-semibold text-gray-900 mb-2">Payout terms</p>
-    <p>
-      Payouts are processed <strong>once at the end of every month</strong>.
-      Minimum payout threshold applies before release. If your balance is below
-      the threshold, it rolls over automatically into the next month.
-    </p>
-  </div>
-
-  <button className="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-2xl font-semibold shadow-lg transition">
-    Generate My Link
-  </button>
-</form>
-
-          {generatedLink && (
-            <div className="mt-6 bg-green-50 border border-green-200 rounded-2xl p-5">
-              <p className="font-semibold text-green-700 mb-2">Your referral link is ready</p>
-              <p className="text-gray-700 break-all">{generatedLink}</p>
-              <Link
-                href={`/influencers/${username}`}
-                className="inline-block mt-4 text-green-600 font-semibold"
-              >
-                Open dashboard →
-              </Link>
-            </div>
-          )}
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5">
+          ✔ Monthly payout processing with automatic threshold rollover
         </div>
       </div>
-    </main>
+
+      <p className="mt-6 sm:mt-8 text-xs sm:text-sm text-gray-500 leading-6 sm:leading-7">
+        Best practice: use your TikTok, Instagram, YouTube or business handle
+        so followers instantly trust the link.
+      </p>
+    </motion.div>
+
+    {/* RIGHT FORM PANEL */}
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.1 }}
+      className="bg-[#111] border border-white/10 rounded-3xl sm:rounded-[2rem] shadow-2xl p-6 sm:p-8 md:p-10"
+    >
+      <h2 className="text-2xl sm:text-3xl font-bold mb-4">
+        Create your referral link
+      </h2>
+
+      <p className="text-gray-400 leading-7 sm:leading-8 text-sm sm:text-base mb-8">
+        Set up your referral identity once. Your dashboard and tracking link
+        will be generated instantly and remain active permanently.
+      </p>
+
+      <form onSubmit={createLink} className="space-y-4 sm:space-y-5">
+        <input
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Username (e.g. tshego100)"
+          className="w-full bg-black border border-white/10 rounded-2xl px-4 sm:px-5 py-3 sm:py-4 outline-none focus:ring-2 focus:ring-green-500 text-white text-sm sm:text-base"
+          required
+        />
+
+        <input
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          placeholder="Phone number for payouts (optional)"
+          className="w-full bg-black border border-white/10 rounded-2xl px-4 sm:px-5 py-3 sm:py-4 outline-none focus:ring-2 focus:ring-green-500 text-white text-sm sm:text-base"
+        />
+
+        <input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email for payout communication"
+          type="email"
+          className="w-full bg-black border border-white/10 rounded-2xl px-4 sm:px-5 py-3 sm:py-4 outline-none focus:ring-2 focus:ring-green-500 text-white text-sm sm:text-base"
+        />
+
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 text-xs sm:text-sm text-gray-400 leading-6 sm:leading-7">
+          <p className="font-semibold text-white mb-2">Payout Terms</p>
+          <p>
+            Payouts are processed <strong className="text-green-400">at the end of every month</strong>.
+            Minimum payout thresholds apply. If the threshold is not reached,
+            earnings automatically roll over to the next cycle.
+          </p>
+        </div>
+
+        <button className="w-full bg-green-600 hover:bg-green-700 text-white py-3 sm:py-4 rounded-2xl text-sm sm:text-base font-semibold shadow-xl transition-all duration-300 hover:-translate-y-0.5">
+          Generate My Link
+        </button>
+      </form>
+
+      {generatedLink && (
+        <div className="mt-6 sm:mt-8 bg-green-500/10 border border-green-500/20 rounded-2xl p-4 sm:p-6">
+          <p className="font-semibold text-green-400 mb-2 text-sm sm:text-base">
+            Your referral link is ready
+          </p>
+
+          <p className="text-gray-300 break-all text-sm sm:text-base">{generatedLink}</p>
+
+          <Link
+            href={`/influencers/${username}`}
+            className="inline-block mt-4 text-green-400 font-semibold hover:text-green-300 transition text-sm sm:text-base"
+          >
+            Open dashboard →
+          </Link>
+        </div>
+      )}
+    </motion.div>
+  </div>
+</main>
   );
 }
 
