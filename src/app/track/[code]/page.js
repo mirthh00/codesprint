@@ -9,8 +9,15 @@ export const metadata = {
 };
 
 export default async function TrackPage({ params }) {
+     const { code } = await params; 
+
+  if (!code) {
+    console.log("Missing tracking code:", params);
+    return notFound();
+  }
+
   const project = await prisma.projectLead.findUnique({
-    where: { trackingCode: params.code },
+    where: { trackingCode: code },
   });
 
   if (!project) return notFound();
