@@ -10,12 +10,34 @@ export default function InfluencersPage() {
   const [email, setEmail] = useState("");
   const [generatedLink, setGeneratedLink] = useState("");
 
-  function createLink(e) {
-    e.preventDefault();
-    const slug = username.trim().toLowerCase().replace(/\s+/g, "");
-    if (!slug) return;
+ async function createLink(e) {
+  e.preventDefault();
+
+  const slug = username.trim().toLowerCase().replace(/\s+/g, "");
+  if (!slug) return;
+
+  try {
+    const res = await fetch("/api/referral", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, email, phone }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.error || "Something went wrong");
+      return;
+    }
+
     setGeneratedLink(`${window.location.origin}/${slug}`);
+  } catch (err) {
+    console.error(err);
+    alert("Failed to create referral");
   }
+}
 
   return (
   <main className="min-h-screen bg-black text-white px-4 sm:px-6 py-10 sm:py-16">
