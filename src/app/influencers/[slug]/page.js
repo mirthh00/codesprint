@@ -1,4 +1,3 @@
-"use client"
 // app/influencers/[slug]/page.jsx
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
