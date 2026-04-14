@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 
 export default async function InfluencerDashboard({ params, searchParams }) {
   const { slug } = await params;
-  const email = searchParams?.email;
+  const email = await searchParams?.email;
 
   if (!slug) return notFound();
 
