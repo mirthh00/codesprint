@@ -15,6 +15,8 @@ model ReferralCode {
   discount    Int      @default(100)
   active      Boolean  @default(true)
   createdAt   DateTime @default(now())
+  email       String?
+  phone       String?
 }
 
 model ReferralClick {
