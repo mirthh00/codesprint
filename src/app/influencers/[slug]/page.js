@@ -4,8 +4,8 @@ import { notFound } from "next/navigation";
 
 export default async function InfluencerDashboard({ params, searchParams }) {
   const { slug } = await params;
-  const email = await searchParams?.email;
-
+  const email = searchParams?.email;
+console.log("Emmm",email)
   if (!slug) return notFound();
 
   // ✅ 1. Check referral exists
@@ -23,9 +23,9 @@ export default async function InfluencerDashboard({ params, searchParams }) {
   }
 
   // OPTIONAL: verify email matches owner
-  if (referral.email && referral.email !== email) {
-    return <EmailGate slug={slug} error="Incorrect email" />;
-  }
+ // if (referral.email && referral.email !== email) {
+    //return <EmailGate slug={slug} error="Incorrect email" />;
+ // }
 
   // ✅ 3. Fetch real data
   const [referrals, clicksData] = await Promise.all([
