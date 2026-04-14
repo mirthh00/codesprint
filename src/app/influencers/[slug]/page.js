@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
 export default async function InfluencerDashboard({ params, searchParams }) {
-  const { slug } = params;
+  const { slug } = await params;
   const email = searchParams?.email;
 
   if (!slug) return notFound();
