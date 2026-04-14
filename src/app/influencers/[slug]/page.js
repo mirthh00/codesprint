@@ -4,8 +4,8 @@ import { notFound } from "next/navigation";
 
 export default async function InfluencerDashboard({ params, searchParams }) {
   const { slug } = await params;
-  const email = searchParams?.email;
-console.log("Emmm",email)
+    const resolvedSearchParams = await searchParams; // ✅ FIX
+  const email = resolvedSearchParams?.email;
   if (!slug) return notFound();
 
   // ✅ 1. Check referral exists
