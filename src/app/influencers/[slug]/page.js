@@ -1,10 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
-import { cookies } from "next/headers";
 import EmailGate from "./EmailGate";
 
-export default async function InfluencerDashboard({ params }) {
+export default async function InfluencerDashboard({ params, searchParams }) {
   const { slug } = await params;
+  const { email, pin } = await searchParams;
 
   if (!slug) return notFound();
 
@@ -16,14 +16,20 @@ export default async function InfluencerDashboard({ params }) {
     return notFound();
   }
 
-  // 🔐 CHECK COOKIE AUTH
-  const authCookie = cookies().get(`influencer_${slug}`);
-
-  if (!authCookie) {
+  // 🔐 If no credentials → show gate
+  if (!email || !pin) {
     return <EmailGate slug={slug} />;
   }
 
-  // 📊 DATA FETCH
+  // 🔐 Validate credentials
+  const emailMatch = referral.email === email;
+  const pinMatch = String(referral.discount) === String(pin);
+
+  if (!emailMatch || !pinMatch) {
+    return <EmailGate slug={slug} error="Incorrect email or PIN" />;
+  }
+
+  // 📊 Fetch data (only if valid)
   const [referrals, clicksData] = await Promise.all([
     prisma.projectLead.findMany({
       where: { referralSlug: slug },
