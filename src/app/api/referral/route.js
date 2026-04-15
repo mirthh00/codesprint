@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { username, email, phone } = body;
+    const { username, email, phone, discount } = body;
 
     if (!username) {
       return NextResponse.json({ error: "Username required" }, { status: 400 });
@@ -29,7 +29,7 @@ export async function POST(req) {
       data: {
         slug,
         influencer: username,
-        discount: 0,
+        discount,
         active: true,
         email,
         phone,
