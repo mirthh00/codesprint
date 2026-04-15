@@ -1,36 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function EmailGate({ slug, error }) {
   const [email, setEmail] = useState("");
   const [pin, setPin] = useState("");
-  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    setLoading(true);
 
-    try {
-      const res = await fetch("/api/influencer-login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slug, email, pin }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        alert(data.error || "Login failed");
-        setLoading(false);
-        return;
-      }
-
-      window.location.reload();
-    } catch (err) {
-      alert("Something went wrong");
-      setLoading(false);
-    }
+    router.push(
+      `/influencers/${slug}?email=${encodeURIComponent(email)}&pin=${encodeURIComponent(pin)}`
+    );
   }
 
   return (
@@ -44,7 +27,7 @@ export default function EmailGate({ slug, error }) {
         </h2>
 
         <p className="text-gray-400 mb-6">
-          Enter your email and 6-digit PIN
+          Enter email and 6-digit PIN
         </p>
 
         {error && (
@@ -70,11 +53,8 @@ export default function EmailGate({ slug, error }) {
           required
         />
 
-        <button
-          disabled={loading}
-          className="w-full bg-green-600 py-3 rounded-xl font-semibold"
-        >
-          {loading ? "Verifying..." : "Access Dashboard"}
+        <button className="w-full bg-green-600 py-3 rounded-xl font-semibold">
+          Access Dashboard
         </button>
       </form>
     </div>
