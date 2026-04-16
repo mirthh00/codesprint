@@ -14,31 +14,30 @@ export default async function ReferralLanding({ params }) {
     notFound();
   }
 
-  try {
-    const headersList = headers();
+try {
+  console.log("TRACKING CLICK FOR:", slug);
 
-    const ip =
-      headersList.get("x-forwarded-for")?.split(",")[0] ||
-      headersList.get("x-real-ip") ||
-      null;
+  const headersList = headers();
 
-    const device = headersList.get("user-agent");
+  const forwarded = headersList.get("x-forwarded-for");
 
-    if (ip) {
-      await prisma.referralClick.create({
-        data: {
-          slug,
-          ip,
-          device,
-        },
-      });
-    }
-  } catch (err) {
-    //  ignore duplicate constraint errors silently
-    // Prisma P2002 = unique constraint violation
-    if (err.code !== "P2002") {
-      console.error("Click tracking failed:", err);
-    }
+  const ip =
+    forwarded?.split(",")[0] ||
+    headersList.get("x-real-ip") ||
+    "unknown";
+
+  const device = headersList.get("user-agent") || "unknown";
+
+  await prisma.referralClick.create({
+    data: {
+      slug,
+      ip,
+      device,
+    },
+  });
+} catch (err) {
+  console.log("CLICK ERROR:", err?.code || err);
+}
   }
 
   return (
