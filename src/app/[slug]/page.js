@@ -38,7 +38,7 @@ try {
 } catch (err) {
   console.log("CLICK ERROR:", err?.code || err);
 }
-  }
+  
 
   return (
     <Hero
