@@ -17,16 +17,14 @@ export default async function ReferralLanding({ params }) {
 try {
   console.log("TRACKING CLICK FOR:", slug);
 
-  const headersList = headers();
-
-  const forwarded = headersList.get("x-forwarded-for");
+  const h = headers?.();
 
   const ip =
-    forwarded?.split(",")[0] ||
-    headersList.get("x-real-ip") ||
+    h?.get?.("x-forwarded-for")?.split(",")[0] ||
+    h?.get?.("x-real-ip") ||
     "unknown";
 
-  const device = headersList.get("user-agent") || "unknown";
+  const device = h?.get?.("user-agent") || "unknown";
 
   await prisma.referralClick.create({
     data: {
@@ -36,7 +34,7 @@ try {
     },
   });
 } catch (err) {
-  console.log("CLICK ERROR:", err?.code || err);
+  console.log("CLICK ERROR:", err);
 }
   
 
