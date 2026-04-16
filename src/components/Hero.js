@@ -186,25 +186,28 @@ const effectiveDiscount = hasReferral ? Math.round(2500 * 0.1) : discount;
       24 hours so you can start attracting leads, building trust and
       making sales immediately.
     </p>
- {hasReferral && (
-  <div className="mb-4 sm:mb-6 bg-green-500/10 border border-green-500/30 rounded-2xl px-4 sm:px-5 py-4 inline-block max-w-full">
-    <p className="text-green-400 font-semibold text-sm sm:text-base break-words">
-      Exclusive 10% OFF + 1 Year Developer Support via {influencer || "partner"}
-    </p>
-    <p className="text-gray-400 text-xs sm:text-sm mt-1">
-      Includes bug fixes, updates & ongoing support after launch.
-    </p>
+<div className="flex flex-col items-center">
+  {hasReferral && (
+    <div className="mb-6 sm:mb-8 bg-green-500/10 border border-green-500/30 rounded-2xl px-4 sm:px-5 py-4 max-w-full text-center">
+      <p className="text-green-400 font-semibold text-sm sm:text-base break-words">
+        Exclusive 10% OFF + 1 Year Developer Support via {influencer || "partner"}
+      </p>
+      <p className="text-gray-400 text-xs sm:text-sm mt-1">
+        Includes bug fixes, updates & ongoing support after launch.
+      </p>
       <p className="text-yellow-400 text-xs mt-2">
-      Limited influencer offer – may expire soon
-    </p>
-  </div>
-)}
-    <Link
-      href={referralSlug ? `/begin?ref=${referralSlug}` : "/begin"}
-      className="inline-block bg-green-600 hover:bg-green-700 text-white px-6 sm:px-10 py-4 sm:py-5 rounded-2xl sm:rounded-3xl text-base sm:text-lg font-semibold shadow-2xl hover:shadow-green-500/20 hover:-translate-y-0.5 transition-all duration-300"
-    >
-      Start My Website →
-    </Link>
+        Limited influencer offer – may expire soon
+      </p>
+    </div>
+  )}
+
+  <Link
+    href={referralSlug ? `/begin?ref=${referralSlug}` : "/begin"}
+    className="inline-block bg-green-600 hover:bg-green-700 text-white px-6 sm:px-10 py-4 sm:py-5 rounded-2xl sm:rounded-3xl text-base sm:text-lg font-semibold shadow-2xl hover:shadow-green-500/20 hover:-translate-y-0.5 transition-all duration-300"
+  >
+    Start My Website →
+  </Link>
+</div>
   </motion.div>
 </div>
       </section>
