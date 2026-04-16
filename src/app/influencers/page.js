@@ -91,6 +91,34 @@ export default function InfluencersPage() {
               ✔ Real-time analytics dashboard tracking clicks, conversions & payouts
             </div>
           </div>
+                <div className="mt-6 sm:mt-8 space-y-4 sm:space-y-5 text-gray-300">
+  <div className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5">
+    <p className="font-semibold text-white mb-2">Earnings Structure</p>
+    <p className="text-sm sm:text-base text-gray-400 mb-3">
+      The more you sell, the more you earn per referral.
+    </p>
+
+    <ul className="space-y-2 text-sm sm:text-base">
+      <li>• 1–5 sales: <span className="text-green-400 font-semibold">R100 per sale</span></li>
+      <li>• 6–15 sales: <span className="text-green-400 font-semibold">R150 per sale</span></li>
+      <li>• 16–25 sales: <span className="text-green-400 font-semibold">R200 per sale</span></li>
+      <li>• 25+ sales: <span className="text-green-400 font-semibold">R300 per sale</span></li>
+    </ul>
+  </div>
+
+  <div className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5">
+    <p className="font-semibold text-white mb-2">Performance Bonuses</p>
+    <p className="text-sm sm:text-base text-gray-400 mb-3">
+      Hit milestones and unlock extra cash rewards.
+    </p>
+
+    <ul className="space-y-2 text-sm sm:text-base">
+      <li>• 10 sales: <span className="text-green-400 font-semibold">+R500 bonus</span></li>
+      <li>• 20 sales: <span className="text-green-400 font-semibold">+R1500 bonus</span></li>
+      <li>• 30+ sales: <span className="text-green-400 font-semibold">+R3000 bonus</span></li>
+    </ul>
+  </div>
+</div>
 
           <p className="mt-6 sm:mt-8 text-xs sm:text-sm text-gray-500 leading-6 sm:leading-7">
             Pro tip: Use your TikTok, Instagram, YouTube or business handle to
