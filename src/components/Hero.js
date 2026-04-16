@@ -12,6 +12,8 @@ export default function Hero({
 }) {
   const fullPrice = 800 - discount;
   const deposit = 400 - discount;
+    const hasReferral = !!referralSlug;
+const effectiveDiscount = hasReferral ? Math.round(2500 * 0.1) : discount;
   const [menuOpen, setMenuOpen] = useState(false);
   const features = [
     {
@@ -26,10 +28,12 @@ export default function Hero({
       title: "Full Website Development",
       text: "Fast, responsive, secure and production-ready website engineering.",
     },
-    {
-      title: "1 Year Developer Support",
-      text: "We remain available long after launch for fixes, help and improvements.",
-    },
+   {
+    title: hasReferral
+      ? "1 Year Developer Support (Included via Referral)"
+      : "1 Year Developer Support",
+    text: "We remain available long after launch for fixes, help and improvements.",
+  },
     {
       title: "Live Progress Tracking",
       text: "Watch your project move from concept to deployment in real time.",
@@ -165,13 +169,19 @@ export default function Hero({
     transition={{ duration: 0.8 }}
     className="w-full"
   >
-    {discount > 0 && (
-      <div className="mb-4 sm:mb-6 bg-green-500/10 border border-green-500/30 rounded-2xl px-4 sm:px-5 py-3 inline-block max-w-full">
-        <p className="text-green-400 font-semibold text-sm sm:text-base break-words">
-          🎉 Exclusive R{discount} OFF from {influencer}
-        </p>
-      </div>
-    )}
+   {hasReferral && (
+  <div className="mb-4 sm:mb-6 bg-green-500/10 border border-green-500/30 rounded-2xl px-4 sm:px-5 py-4 inline-block max-w-full">
+    <p className="text-green-400 font-semibold text-sm sm:text-base break-words">
+      Exclusive 10% OFF + 1 Year Developer Support via {influencer || "partner"}
+    </p>
+    <p className="text-gray-400 text-xs sm:text-sm mt-1">
+      Includes bug fixes, updates & ongoing support after launch.
+    </p>
+      <p className="text-yellow-400 text-xs mt-2">
+      Limited influencer offer – may expire soon
+    </p>
+  </div>
+)}
 
     <p className="text-green-400 font-semibold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-xs sm:text-sm mb-3 sm:mb-4">
       Launch Your Business Online Fast
@@ -238,9 +248,18 @@ export default function Hero({
           Premium Website Package
         </p>
 
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4">
-          R2500
-        </h2>
+       <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4">
+  {hasReferral ? (
+    <>
+      <span className="line-through text-gray-500 text-2xl mr-2">
+        R2500
+      </span>
+      R{2500 - effectiveDiscount}
+    </>
+  ) : (
+    "R2500"
+  )}
+</h2>
 
         <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto leading-7 sm:leading-8">
           A complete, professionally designed and developed website delivered
