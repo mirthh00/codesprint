@@ -17,6 +17,7 @@ if (ref) {
 
   return (
     <main className="min-h-screen bg-black">
+    <p color="white">{ref}:{referralSlug}</p>
       <LeadForm
         referralSlug={referralSlug}
       />
