@@ -20,8 +20,8 @@ export async function POST(req) {
     const trackingCode = crypto.randomUUID();
 
     // Dynamic pricing
-    const finalPrice = referralSlug ? 700 : 800;
-    const depositAmount = referralSlug ? 300 : 400;
+  const finalPrice = referralSlug ? 2250 : 2500;
+    const depositAmount = finalPrice;
 
     // Upload branding files to Cloudinary
  const files = data.getAll("branding");
