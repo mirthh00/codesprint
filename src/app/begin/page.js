@@ -7,7 +7,11 @@ export const metadata = {
 };
 
 export default function GetStarted({ searchParams }) {
-  const referralSlug = searchParams?.ref || "";
+  const { ref } = await searchParams;
+  let referralSlug = "";
+  if(ref){
+     referralSlug = ref;
+  }
 
   return (
     <main className="min-h-screen bg-black">
