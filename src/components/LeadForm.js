@@ -63,7 +63,7 @@ const deposit = fullPrice;
           </p>
 
           <h2 className="text-3xl sm:text-4xl font-bold leading-tight mb-6">
-            Your premium business website launches in 24 hours.
+            Your premium business website launches in 24 hours.{referralSlug}
           </h2>
 
           <p className="text-gray-400 leading-7 sm:leading-8 text-base sm:text-lg">
