@@ -6,21 +6,16 @@ export const metadata = {
     "Get your custom business website in just 24 hours.",
 };
 
-export default function GetStarted({ searchParams }) {
-  const { ref } = searchParams || {};
+export default async function GetStarted({ searchParams }) {
+  const params = await searchParams; // ✅ resolve it
 
-let referralSlug = "";
-
-if (ref) {
-  referralSlug = ref;
-}
+  const referralSlug = params?.ref || "";
 
   return (
-    <main className="min-h-screen bg-black">
-    <p color="white">{ref}:{referralSlug}</p>
-      <LeadForm
-        referralSlug={referralSlug}
-      />
+    <main className="min-h-screen bg-black text-white">
+      <p>ref: {params?.ref} | slug: {referralSlug}</p>
+
+      <LeadForm referralSlug={referralSlug} />
     </main>
   );
 }
