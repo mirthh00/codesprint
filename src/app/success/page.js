@@ -2,7 +2,8 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
 export default async function PaymentSuccessPage({ searchParams }) {
-  const leadId = searchParams.leadId;
+  const params = await searchParams;
+  const leadId = params.leadId;
 
   let trackingCode = null;
 
