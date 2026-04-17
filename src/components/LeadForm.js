@@ -5,9 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 export default function LeadForm({
-  referralSlug = "",
-  influencer = "",
-  discount = 0,
+  referralSlug = ""
 }) {
   const [loading, setLoading] = useState(false);
 
@@ -108,7 +106,7 @@ const deposit = fullPrice;
         {hasReferral ? (
           <div className="mb-6 bg-green-500/10 border border-green-500/20 rounded-2xl p-4 sm:p-5">
             <p className="text-green-400 font-semibold text-sm sm:text-base">
-              Exclusive 10% OFF from {influencer}
+              Exclusive 10% OFF from {referralSlug}
             </p>
             <p className="text-gray-300 mt-2 text-sm sm:text-base">
               Total package: <strong>R{fullPrice}</strong>
