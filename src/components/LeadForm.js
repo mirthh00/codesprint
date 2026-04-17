@@ -11,8 +11,10 @@ export default function LeadForm({
 }) {
   const [loading, setLoading] = useState(false);
 
-  const fullPrice = 2500;
-  const deposit = 2500;
+const hasReferral = !!referralSlug;
+
+const fullPrice = hasReferral ? 2250 : 2500;
+const deposit = fullPrice;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -103,22 +105,19 @@ export default function LeadForm({
           assets so we can build something premium and conversion-focused.
         </p>
 
-        {discount > 0 ? (
+        {hasReferral ? (
           <div className="mb-6 bg-green-500/10 border border-green-500/20 rounded-2xl p-4 sm:p-5">
             <p className="text-green-400 font-semibold text-sm sm:text-base">
-              🎉 Exclusive R{discount} OFF from {influencer}
+              Exclusive 10% OFF from {influencer}
             </p>
             <p className="text-gray-300 mt-2 text-sm sm:text-base">
               Total package: <strong>R{fullPrice}</strong>
-            </p>
-            <p className="text-gray-300 text-sm sm:text-base">
-              Deposit required now: <strong>R{deposit}</strong>
             </p>
           </div>
         ) : (
           <div className="mb-6 bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5">
             <p className="text-gray-300 text-sm sm:text-base">
-              Total package: <strong>R2500</strong>
+              Total package: <strong>R{fullPrice}</strong>
             </p>
           </div>
         )}
@@ -155,7 +154,7 @@ export default function LeadForm({
 
           <textarea
             name="design"
-            placeholder="Describe your preferred design style"
+            placeholder="Describe your preferred design style and share any websites that inspire your vision"
             required
             className="w-full bg-black border border-white/10 rounded-2xl px-4 sm:px-5 py-3 sm:py-4 h-24 sm:h-28 outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base"
           />
@@ -173,7 +172,7 @@ export default function LeadForm({
           >
             {loading
               ? "Processing payment..."
-              : `Pay R2500 & Start`}
+              : `Pay R${fullPrice} & Start`}
           </button>
         </form>
       </div>
