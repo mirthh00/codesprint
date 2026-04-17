@@ -7,14 +7,12 @@ export const metadata = {
 };
 
 export default async function GetStarted({ searchParams }) {
-  const params = await searchParams; // ✅ resolve it
+  const params = await searchParams; 
 
   const referralSlug = params?.ref || "";
 
   return (
     <main className="min-h-screen bg-black text-white">
-      <p>ref: {params?.ref} | slug: {referralSlug}</p>
-
       <LeadForm referralSlug={referralSlug} />
     </main>
   );
