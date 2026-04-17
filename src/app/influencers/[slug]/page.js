@@ -42,8 +42,7 @@ export default async function InfluencerDashboard({ params, searchParams }) {
   ]);
 
   const clicks = clicksData.length;
-  const signups = referrals.length;
-  const deposits = referrals.filter((r) => r.depositPaid).length;
+  const sales = referrals.length;
   const conversionRate = clicks ? Math.round((signups / clicks) * 100) : 0;
 
   return (
