@@ -42,7 +42,7 @@ export default async function InfluencerDashboard({ params, searchParams }) {
   ]);
 
   const clicks = clicksData.length;
-  const sales = referrals.length;
+  const signups = referrals.length;
   const conversionRate = clicks ? Math.round((signups / clicks) * 100) : 0;
 
   return (
@@ -63,9 +63,8 @@ export default async function InfluencerDashboard({ params, searchParams }) {
           <div className="p-8 space-y-8">
             <div className="grid md:grid-cols-5 gap-4">
               <StatCard label="Clicks" value={clicks} />
-              <StatCard label="Signups" value={signups} />
-              <StatCard label="Deposits" value={deposits} />
-              <StatCard label="Payout" value={`R${deposits * 100}`} />
+              <StatCard label="Sales" value={signups} />
+              <StatCard label="Payout" value={`R${signups * 100}`} />
               <StatCard label="Conversion" value={`${conversionRate}%`} />
             </div>
 
@@ -87,7 +86,7 @@ export default async function InfluencerDashboard({ params, searchParams }) {
                         <p className="text-sm text-gray-500">{lead.email}</p>
                       </div>
                       <p className="text-green-600 font-semibold">
-                        {lead.depositPaid ? "Paid" : "Pending"}
+                        {lead.paymentStatus}
                       </p>
                     </div>
                   ))}
