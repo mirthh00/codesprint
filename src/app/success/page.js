@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 
 export default async function PaymentSuccessPage({ searchParams }) {
   const params = await searchParams;
-  const leadId = params.leadId;
+  const leadId = params?.leadId;
 
   let trackingCode = null;
 
