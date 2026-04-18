@@ -67,23 +67,25 @@ const effectiveDiscount = hasReferral ? Math.round(2500 * 0.1) : discount;
     },
   ];
 
-    useEffect(() => {
-    async function track() {
-      await fetch("/api/track-click", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          slug: referralSlug,
-          userAgent: navigator.userAgent,
-          platform: navigator.platform,
-        }),
-      });
-    }
+   useEffect(() => {
+  if (!referralSlug) return; // 🛑 stop if empty
 
-    track();
-  }, []);
+  async function track() {
+    await fetch("/api/track-click", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        slug: referralSlug,
+        userAgent: navigator.userAgent,
+        platform: navigator.platform,
+      }),
+    });
+  }
+
+  track();
+}, [referralSlug]); // 👈 depend on slug
 
   return (
     <main className="bg-black text-white">
