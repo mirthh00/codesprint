@@ -14,33 +14,9 @@ export default async function ReferralLanding({ params }) {
     notFound();
   }
 
-try {
-  console.log("TRACKING CLICK FOR:", slug);
-
-  const h = headers?.();
-
-  const ip =
-    h?.get?.("x-forwarded-for")?.split(",")[0] ||
-    h?.get?.("x-real-ip") ||
-    "unknown";
-
-  const device = h?.get?.("user-agent") || "unknown";
-
-  await prisma.referralClick.create({
-    data: {
-      slug,
-      ip,
-      device,
-    },
-  });
-} catch (err) {
-  console.log("CLICK ERROR:", err);
-}
-  
-
   return (
     <Hero
-      discount={referral.discount}
+      discount={0}
       referralSlug={referral.slug}
       influencer={referral.influencer}
     />
