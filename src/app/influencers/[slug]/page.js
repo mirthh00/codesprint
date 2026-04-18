@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import EmailGate from "./EmailGate";
-import { motion } from "framer-motion";
+import ProgressBar from "./ProgressBar";
 
 export default async function InfluencerDashboard({ params, searchParams }) {
   const { slug } = await params;
@@ -119,14 +119,14 @@ export default async function InfluencerDashboard({ params, searchParams }) {
 
           {nextTier && (
             <p className="text-yellow-300">
-              🔥 Only {nextTier.target - sales} more sales to unlock{" "}
+              Only {nextTier.target - sales} more sales to unlock{" "}
               {nextTier.reward}
             </p>
           )}
 
           {nextBonus && (
             <p className="text-blue-300">
-              🎯 {nextBonus.target - sales} more sales for {nextBonus.reward}
+              {nextBonus.target - sales} more sales for {nextBonus.reward}
             </p>
           )}
 
@@ -210,24 +210,4 @@ function StatCard({ label, value, highlight }) {
   );
 }
 
-function ProgressBar({ label, progress, remaining, highlight }) {
-  return (
-    <div>
-      <div className="flex justify-between text-xs mb-1">
-        <p>{label}</p>
-        <p className="text-gray-500">{remaining} left</p>
-      </div>
 
-      <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={{ width: `${progress}%` }}
-          transition={{ duration: 0.8 }}
-          className={`h-full ${
-            highlight ? "bg-green-500" : "bg-white"
-          }`}
-        />
-      </div>
-    </div>
-  );
-}
