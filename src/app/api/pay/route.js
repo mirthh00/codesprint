@@ -57,7 +57,7 @@ export async function GET(req) {
   email_address: lead.email,
   m_payment_id: String(lead.id),
   amount: Number(lead.depositAmount).toFixed(2),
-  item_name: "CodeSprint Website Deposit",
+  item_name: "CodeSprint Website Payment",
 };
 
    const signature = generateSignature(
