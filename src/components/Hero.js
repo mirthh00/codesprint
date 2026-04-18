@@ -216,7 +216,7 @@ const effectiveDiscount = hasReferral ? Math.round(2500 * 0.1) : discount;
         Includes bug fixes, updates & ongoing support after launch.
       </p>
       <p className="text-yellow-400 text-xs mt-2">
-        Limited influencer offer – may expire soon
+        Limited influencer offer - may expire soon
       </p>
     </div>
   )}
@@ -286,7 +286,7 @@ const effectiveDiscount = hasReferral ? Math.round(2500 * 0.1) : discount;
 
         <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto leading-7 sm:leading-8">
           A complete, professionally designed and developed website delivered
-          in 24 hours — built to position your business as credible, modern
+          in 24 hours - built to position your business as credible, modern
           and ready to convert visitors into customers.
         </p>
       </motion.div>
@@ -304,7 +304,7 @@ const effectiveDiscount = hasReferral ? Math.round(2500 * 0.1) : discount;
         </h3>
 
         <p className="text-gray-400 leading-7 sm:leading-8 text-base sm:text-lg">
-          You're not just paying for a website — you're investing in a complete
+          You're not just paying for a website - you're investing in a complete
           online presence designed to help your business stand out, build trust
           and generate real results from day one.
         </p>
