@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Hero({
   discount = 0,
@@ -66,6 +66,24 @@ const effectiveDiscount = hasReferral ? Math.round(2500 * 0.1) : discount;
       category: "Lifestyle",
     },
   ];
+
+    useEffect(() => {
+    async function track() {
+      await fetch("/api/track-click", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          slug: referralSlug,
+          userAgent: navigator.userAgent,
+          platform: navigator.platform,
+        }),
+      });
+    }
+
+    track();
+  }, []);
 
   return (
     <main className="bg-black text-white">
