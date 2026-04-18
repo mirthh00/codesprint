@@ -69,7 +69,7 @@ const params = new URLSearchParams(paymentData);
 
 params.append("signature", signature);
 
-    const payfastUrl = `https://sandbox.payfast.co.za/eng/process?${params.toString()}`;
+    const payfastUrl = `https://www.payfast.co.za/eng/process?${params.toString()}`;
 
     return NextResponse.redirect(payfastUrl);
   } catch (error) {
